@@ -9,7 +9,7 @@ import dungeonmania.mvp.TestUtils;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 
-public class ArmoutTest {
+public class ArmourTest {
     @Test
     public void pickUpArmour() {
         DungeonManiaController dmc;
