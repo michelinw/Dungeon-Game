@@ -19,18 +19,11 @@ public class Armour extends Entity implements InventoryItem {
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof Player) {
-            if (!((Player) entity).pickUp(this))
-                return;
+            // if (!((Player) entity).pickUp(this))
+            //     return;
+            Player player = (Player) entity;
+            player.pickUp(this);
             map.destroyEntity(this);
         }
     }
-
-    @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-    }
-
-    @Override
-    public void onDestroy(GameMap gameMap) {
-    }
-
 }
