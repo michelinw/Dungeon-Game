@@ -9,7 +9,6 @@ import dungeonmania.util.Position;
 public class Armour extends Entity implements InventoryItem {
     public Armour(Position position) {
         super(position);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
@@ -28,12 +27,10 @@ public class Armour extends Entity implements InventoryItem {
 
     @Override
     public void onMovedAway(GameMap map, Entity entity) {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void onDestroy(GameMap gameMap) {
-        // TODO Auto-generated method stub
     }
 
 }
