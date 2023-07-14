@@ -171,6 +171,8 @@ public class EntityFactory {
             return new Door(pos, jsonEntity.getInt("key"));
         case "key":
             return new Key(pos, jsonEntity.getInt("key"));
+        case "armour":
+            return new Armour(pos);
         default:
             return null;
         }
