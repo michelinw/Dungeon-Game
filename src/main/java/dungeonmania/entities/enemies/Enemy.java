@@ -5,11 +5,21 @@ import dungeonmania.battles.BattleStatistics;
 import dungeonmania.battles.Battleable;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.enemies.movementStrategy.MovementStrategy;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public abstract class Enemy extends Entity implements Battleable {
     private BattleStatistics battleStatistics;
+    private MovementStrategy nextPositionStrategy;
+
+    public void setNextPositionStrategy(MovementStrategy nextPositionStrategy) {
+        this.nextPositionStrategy = nextPositionStrategy;
+    }
+
+    public Position getNextPosition(Game game) {
+        return nextPositionStrategy.getNextPosition(this, game);
+    }
 
     public Enemy(Position position, double health, double attack) {
         super(position.asLayer(Entity.CHARACTER_LAYER));
