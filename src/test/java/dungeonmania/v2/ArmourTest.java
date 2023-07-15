@@ -24,19 +24,4 @@ public class ArmourTest {
         assertEquals(1, TestUtils.getInventory(res, "armour").size());
         assertEquals(0, TestUtils.getEntities(res, "armour").size());
     }
-
-    @Test
-    public void otherEntityOverlapArmour() {
-        DungeonManiaController dmc;
-        dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_armour", "c_armour");
-
-        assertEquals(1, TestUtils.getEntities(res, "armour").size());
-        assertEquals(0, TestUtils.getInventory(res, "armour").size());
-
-        // pick up armour
-        res = dmc.tick(Direction.RIGHT);
-        assertEquals(1, TestUtils.getInventory(res, "armour").size());
-        assertEquals(0, TestUtils.getEntities(res, "armour").size());
-    }
 }
