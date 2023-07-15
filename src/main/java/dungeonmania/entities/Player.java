@@ -89,10 +89,11 @@ public class Player extends Entity implements Battleable {
         return inventory.getEntity(itemUsedId);
     }
 
-    public boolean pickUp(Entity item) {
-        if (item instanceof Treasure)
+    public boolean pickUp(InventoryItem item) {
+        if (item instanceof Treasure) {
             collectedTreasureCount++;
-        return inventory.add((InventoryItem) item);
+        }
+        return inventory.add(item);
     }
 
     public Inventory getInventory() {
