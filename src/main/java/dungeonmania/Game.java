@@ -26,6 +26,7 @@ public class Game {
     private BattleFacade battleFacade;
     private EntityFactory entityFactory;
     private boolean isInTick = false;
+    private int numEnemiesDestroyed;
     public static final int PLAYER_MOVEMENT = 0;
     public static final int PLAYER_MOVEMENT_CALLBACK = 1;
     public static final int AI_MOVEMENT = 2;
@@ -42,6 +43,7 @@ public class Game {
         this.name = dungeonName;
         this.map = new GameMap();
         this.battleFacade = new BattleFacade();
+        this.numEnemiesDestroyed = 0;
     }
 
     public void init() {
@@ -82,6 +84,7 @@ public class Game {
         }
         if (enemy.getBattleStatistics().getHealth() <= 0) {
             map.destroyEntity(enemy);
+            numEnemiesDestroyed++;
         }
     }
 
@@ -202,5 +205,9 @@ public class Game {
 
     public BattleFacade getBattleFacade() {
         return battleFacade;
+    }
+
+    public int getNumEnemiesDestroyed() {
+        return numEnemiesDestroyed;
     }
 }
