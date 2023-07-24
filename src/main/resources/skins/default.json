@@ -44,9 +44,12 @@
         "zombie_toast": "images/tileset/entities/zombie.png",
         "boulders": "images/tileset/entities/boulder_00.png",
         "enemies": "images/tileset/items/sword_silver.png",
+<<<<<<< HEAD
         "midnight_armour": "images/tileset/entities/midnight_armour.png",
         "sun_stone": "images/tileset/entities/sun_stone.png",
         "sceptre": "images/tileset/entities/sceptre.png",
+=======
+>>>>>>> 0cdc4ab (further rebasing, merge conflicts, edits to allow for effective frontend tests)
         "wire": "images/tileset/entities/wire.png",
         "light_bulb_off": "images/tileset/entities/lightbulboff.png",
         "light_bulb_on": "images/tileset/entities/lightbulb.png",

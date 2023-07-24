@@ -78,10 +78,6 @@ public class Mercenary extends Enemy implements Interactable {
         return underControl;
     }
 
-    public boolean isAdjacentToPlayer() {
-        return isAdjacentToPlayer;
-    }
-
     public void setUnderControl(boolean underControl) {
         this.underControl = underControl;
         if (underControl) {
@@ -145,7 +141,6 @@ public class Mercenary extends Enemy implements Interactable {
                 map.moveTo(this, nextPos);
             }
         }
-<<<<<<< HEAD
         if (this.isUnderControl()) {
             int length = this.getControlLength() - 1;
             this.setControlLength(length);
@@ -153,19 +148,6 @@ public class Mercenary extends Enemy implements Interactable {
                 this.setUnderControl(false);
             }
         }
-<<<<<<< HEAD
-=======
-        map.moveTo(this, nextPos);
-=======
->>>>>>> 9b15c71 (completed task 2 part c without tests, rebasing file to resolve merge conflicts upon merging.)
-        if (this.isUnderControl()) {
-            int length = this.getControlLength() - 1;
-            this.setControlLength(length);
-            if (length == 0) {
-                this.setUnderControl(false);
-            }
-        }
->>>>>>> 56d8aff (Task2partd)
     }
 
     @Override
