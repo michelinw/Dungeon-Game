@@ -33,14 +33,30 @@
         {
             "x": 5,
             "y": 0,
+<<<<<<< HEAD
             "type": "light_bulb_off",
             "logic": "and"
+=======
+            "type": "light_bulb",
+            "logicalRule": "TRUE"
+>>>>>>> c4d0e80 (edits to allow for effective frontend tests)
         },
         {
             "x": 3,
             "y": 2,
+<<<<<<< HEAD
             "type": "switch_door",
             "logic": "or"
+=======
+            "type": "light_bulb",
+            "logicalRule": "TRUE"
+        },
+        {
+            "type" : "bomb",
+            "logicalRule" : "AND",
+            "x" : 3,
+            "y" : 2
+>>>>>>> c4d0e80 (edits to allow for effective frontend tests)
         },
         {
             "x": 3,
@@ -48,7 +64,11 @@
             "type": "exit"
         }
     ],
+<<<<<<< HEAD
     "goal-condition": {
         "goal": "exit"
     }
+=======
+    "goal-condition": {"goal": "exit"}
+>>>>>>> c4d0e80 (edits to allow for effective frontend tests)
 }

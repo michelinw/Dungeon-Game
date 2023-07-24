@@ -29,7 +29,7 @@
             "x": 5,
             "y": 0,
             "type": "light_bulb_off",
-            "logic": "coand"
+            "logic": "co_and"
         },
         {
             "x": 4,
