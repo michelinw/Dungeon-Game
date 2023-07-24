@@ -46,6 +46,11 @@
         "enemies": "images/tileset/items/sword_silver.png",
         "midnight_armour": "images/tileset/entities/midnight_armour.png",
         "sun_stone": "images/tileset/entities/sun_stone.png",
-        "sceptre": "images/tileset/entities/sceptre.png"
+        "sceptre": "images/tileset/entities/sceptre.png",
+        "wire": "images/tileset/entities/wire.png",
+        "light_bulb_off": "images/tileset/entities/lightbulboff.png",
+        "light_bulb_on": "images/tileset/entities/lightbulb.png",
+        "switch_door": "images/tileset/walls/wooden/door_locked_silver.png",
+        "switch_door_open": "images/tileset/walls/wooden/door_unlocked.png"
     }
 }

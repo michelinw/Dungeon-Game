@@ -11,10 +11,11 @@ import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.Portal;
-import dungeonmania.entities.Switch;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.entities.enemies.ZombieToastSpawner;
+import dungeonmania.entities.logicalentities.LogicBombActivator;
+import dungeonmania.entities.logicalentities.LogicalEntity;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
@@ -35,17 +36,35 @@ public class GameMap {
         initPairPortals();
         initRegisterMovables();
         initRegisterSpawners();
-        initRegisterBombsAndSwitches();
+        initRegisterBombsAndActivators();
+        initRegisterLogicalEntites();
     }
 
-    private void initRegisterBombsAndSwitches() {
+    private void initRegisterLogicalEntites() {
+        List<LogicalEntity> logicalEntities = getEntities(LogicalEntity.class);
+        int totalLogicalEntity = logicalEntities.size();
+
+        for (int i = 0; i < totalLogicalEntity; i++) {
+            for (int j = i + 1; j < totalLogicalEntity; j++) {
+                LogicalEntity li = logicalEntities.get(i);
+                LogicalEntity lj = logicalEntities.get(j);
+
+                if (Position.isAdjacent(li.getPosition(), lj.getPosition())) {
+                    li.subscribeLogicalEntities(lj);
+                    lj.subscribeLogicalEntities(li);
+                }
+            }
+        }
+    }
+
+    private void initRegisterBombsAndActivators() {
         List<Bomb> bombs = getEntities(Bomb.class);
-        List<Switch> switchs = getEntities(Switch.class);
+        List<LogicBombActivator> activators = getEntities(LogicBombActivator.class);
         for (Bomb b : bombs) {
-            for (Switch s : switchs) {
-                if (Position.isAdjacent(b.getPosition(), s.getPosition())) {
-                    b.subscribe(s);
-                    s.subscribe(b);
+            for (LogicBombActivator a : activators) {
+                if (Position.isAdjacent(b.getPosition(), a.getPosition())) {
+                    b.subscribe(a);
+                    a.subscribe(b);
                 }
             }
         }
@@ -118,6 +137,7 @@ public class GameMap {
         getEntities(entity.getPosition()).forEach(e -> {
             if (e != entity)
                 overlapCallbacks.add(() -> e.onOverlap(this, entity));
+            overlapCallbacks.add(() -> entity.onOverlap(this, e));
         });
         overlapCallbacks.forEach(callback -> {
             callback.run();

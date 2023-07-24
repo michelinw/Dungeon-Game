@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
-import dungeonmania.entities.Switch;
 import dungeonmania.entities.inventory.InventoryItem;
+import dungeonmania.entities.logicalentities.LogicBombActivator;
+import dungeonmania.entities.logicalentities.LogicalEntity;
 import dungeonmania.map.GameMap;
 
-public class Bomb extends InventoryItem {
+public class Bomb extends LogicalEntity implements InventoryItem {
     public enum State {
         SPAWNED, INVENTORY, PLACED
     }
@@ -21,33 +22,36 @@ public class Bomb extends InventoryItem {
     private State state;
     private int radius;
 
-    private List<Switch> subs = new ArrayList<>();
+    private List<LogicBombActivator> subs = new ArrayList<>();
 
-    public Bomb(Position position, int radius) {
-        super(position);
+    public Bomb(Position position, int radius, String rule) {
+        super(position, rule);
         state = State.SPAWNED;
         this.radius = radius;
     }
 
-    public void subscribe(Switch s) {
-        this.subs.add(s);
+    public void subscribe(LogicBombActivator e) {
+        this.subs.add(e);
     }
 
     public void notify(GameMap map) {
-        explode(map);
+        if (this.isActivatedTick()) {
+            explode(map);
+        }
+    }
+
+    public void pickedUp() {
+        if (state == State.SPAWNED) {
+            this.state = State.INVENTORY;
+            subs.stream().forEach(a -> a.unsubscribe(this));
+            subs.stream().forEach(a -> a.unsubscribeLogicalEntities(this));
+            subs.stream().forEach(a -> this.unsubscribeLogicalEntities(a));
+        }
     }
 
     @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        if (state != State.SPAWNED)
-            return;
-        if (entity instanceof Player) {
-            if (!((Player) entity).pickUp(this))
-                return;
-            subs.stream().forEach(s -> s.unsubscribe(this));
-            map.destroyEntity(this);
-        }
-        this.state = State.INVENTORY;
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return true;
     }
 
     public void onPutDown(GameMap map, Position p) {
@@ -56,10 +60,16 @@ public class Bomb extends InventoryItem {
         this.state = State.PLACED;
         List<Position> adjPosList = getPosition().getCardinallyAdjacentPositions();
         adjPosList.stream().forEach(node -> {
-            List<Entity> entities = map.getEntities(node).stream().filter(e -> (e instanceof Switch))
+            List<Entity> entities = map.getEntities(node).stream().filter(e -> (e instanceof LogicalEntity))
                     .collect(Collectors.toList());
-            entities.stream().map(Switch.class::cast).forEach(s -> s.subscribe(this, map));
-            entities.stream().map(Switch.class::cast).forEach(s -> this.subscribe(s));
+            entities.stream().map(LogicalEntity.class::cast).forEach(e -> this.subscribeLogicalEntities(e));
+            entities.stream().map(LogicalEntity.class::cast).forEach(e -> e.subscribeLogicalEntities(this));
+        });
+        adjPosList.stream().forEach(node -> {
+            List<Entity> logicActivator = map.getEntities(node).stream().filter(a -> (a instanceof LogicBombActivator))
+                    .collect(Collectors.toList());
+            logicActivator.stream().map(LogicBombActivator.class::cast).forEach(a -> a.subscribe(this, map));
+            logicActivator.stream().map(LogicBombActivator.class::cast).forEach(a -> this.subscribe(a));
         });
     }
 
