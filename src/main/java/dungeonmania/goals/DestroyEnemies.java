@@ -23,10 +23,6 @@ public class DestroyEnemies implements Goal {
     public String toString(Game game) {
         if (this.achieved(game))
             return "";
-<<<<<<< HEAD
         return ":enemies";
-=======
-        return ":destroyEnemies";
->>>>>>> 4f7d069 (Finished basic tests and implementation)
     }
 }
