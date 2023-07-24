@@ -1,33 +1,26 @@
 package dungeonmania.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dungeonmania.entities.collectables.Bomb;
+import dungeonmania.entities.conductable.Conductor;
+import dungeonmania.entities.logicalentities.LogicBombActivator;
+import dungeonmania.entities.logicalentities.Rule;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Switch extends Entity {
+public class Switch extends LogicBombActivator implements Conductor {
     private boolean activated;
-    private List<Bomb> bombs = new ArrayList<>();
 
     public Switch(Position position) {
-        super(position.asLayer(Entity.ITEM_LAYER));
+        super(position.asLayer(Entity.ITEM_LAYER), Rule.TRUE);
     }
 
-    public void subscribe(Bomb b) {
-        bombs.add(b);
-    }
-
+    @Override
     public void subscribe(Bomb bomb, GameMap map) {
-        bombs.add(bomb);
+        addBomb(bomb);
         if (activated) {
-            bombs.stream().forEach(b -> b.notify(map));
+            setActivated(map.getGame().getTick(), true, map);
+            this.getBombs().stream().forEach(b -> b.notify(map));
         }
-    }
-
-    public void unsubscribe(Bomb b) {
-        bombs.remove(b);
     }
 
     @Override
@@ -39,7 +32,8 @@ public class Switch extends Entity {
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof Boulder) {
             activated = true;
-            bombs.stream().forEach(b -> b.notify(map));
+            setActivated(map.getGame().getTick(), activated, map);
+            this.getBombs().stream().forEach(b -> b.notify(map));
         }
     }
 
@@ -47,6 +41,7 @@ public class Switch extends Entity {
     public void onMovedAway(GameMap map, Entity entity) {
         if (entity instanceof Boulder) {
             activated = false;
+            setActivated(map.getGame().getTick(), activated, map);
         }
     }
 

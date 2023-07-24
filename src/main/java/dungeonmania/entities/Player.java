@@ -78,6 +78,11 @@ public class Player extends Entity implements Battleable {
             }
             map.getGame().battle(this, (Enemy) entity);
         }
+
+        if (entity instanceof InventoryItem) {
+            if (pickUp(entity))
+                map.destroyEntity(entity);
+        }
     }
 
     @Override
@@ -89,11 +94,18 @@ public class Player extends Entity implements Battleable {
         return inventory.getEntity(itemUsedId);
     }
 
-    public boolean pickUp(InventoryItem item) {
+    public boolean pickUp(Entity item) {
         if (item instanceof Treasure) {
             collectedTreasureCount++;
+        } else if (item instanceof Bomb) {
+            Bomb bomb = (Bomb) item;
+            if (bomb.getState() != Bomb.State.SPAWNED) {
+                return false;
+            }
+            bomb.pickedUp();
         }
-        return inventory.add(item);
+
+        return inventory.add((InventoryItem) item);
     }
 
     public Inventory getInventory() {

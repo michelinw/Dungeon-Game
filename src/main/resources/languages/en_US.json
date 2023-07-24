@@ -3,9 +3,9 @@
         "font": "alagard.ttf",
         "title": "Dungeon Mania",
         "subtitle_1": "Frontend created by:\n Braedon Wooding, George Litsas, Nick Patrikeos, Noa Challis",
-        "subtitle_2": "Backend created by: <your names here>",
+        "subtitle_2": "Backend created by: Michael Wang, Rohan Agarwal, Agrim Shakergaye",
         "buttons": {
-            "new_game": "Start New Game",
+            "new_game": "BEGIN!",
             "load_game": "Load Game",
             "quit_game": "Quit Game",
             "credits": "Credits"
