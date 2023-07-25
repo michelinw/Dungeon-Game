@@ -133,7 +133,7 @@ public class EntityFactory {
         return new MidnightArmour(midnightAttack, midnightDefence);
     }
 
-    public Entity buildSceptre() {
+    public Sceptre buildSceptre() {
         int controlLength = config.optInt("mind_control_duration");
         return new Sceptre(controlLength);
     }

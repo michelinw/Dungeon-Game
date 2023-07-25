@@ -3,12 +3,7 @@
         {
             "type": "player",
             "x": 1,
-            "y": 3
-        },
-        {
-            "type": "mercenary",
-            "x": 2,
-            "y": 8
+            "y": 2
         },
         {
             "type": "door",
@@ -23,13 +18,14 @@
         },
         {
             "type": "arrow",
-            "x": 3,
+            "x": 2,
             "y": 1
         },
         {
-            "type": "wood",
-            "x": 2,
-            "y": 1
+            "type": "key",
+            "x": 3,
+            "y": 1,
+            "key": 1
         },
         {
             "type": "sword",
@@ -38,13 +34,18 @@
         },
         {
             "type": "sun_stone",
-            "x": 8,
-            "y": 3
+            "x": 4,
+            "y": 1
         },
         {
             "type": "exit",
             "x": 8,
             "y": 8
+        },
+        {
+            "type": "mercenary",
+            "x": 24,
+            "y": 6
         }
     ],
     "goal-condition": {
