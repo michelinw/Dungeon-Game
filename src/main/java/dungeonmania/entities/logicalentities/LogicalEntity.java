@@ -35,12 +35,7 @@ public class LogicalEntity extends Entity {
 
     private boolean isAndActivated() {
         boolean isAct = true;
-        // System.out.println("adjacentLogicalEntities.size(): " + adjacentLogicalEntities.size());
 
-        // for (int i = 0; i < adjacentLogicalEntities.size(); i++) {
-        //     Entity entity = (Entity) adjacentLogicalEntities.get(i);
-        //     System.out.println(entity.getPosition() + " " + entity.getClass() + " " + entity.toString());
-        // }
         for (LogicalEntity e : adjacentLogicalEntities) {
             if (!e.isActivatedTick()) {
                 isAct = false;
