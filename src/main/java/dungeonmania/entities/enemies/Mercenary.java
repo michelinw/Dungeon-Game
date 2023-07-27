@@ -5,10 +5,13 @@ import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.buildables.Sceptre;
+import dungeonmania.entities.collectables.SunStone;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrategy;
 import dungeonmania.entities.enemies.movementStrategy.InvisibilityMovementStrategy;
+import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 
 import dungeonmania.util.Position;
@@ -26,6 +29,8 @@ public class Mercenary extends Enemy implements Interactable {
     private double allyDefence;
     private boolean allied = false;
     private boolean isAdjacentToPlayer = false;
+    private boolean underControl = false;
+    private int controlLength;
 
     public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius,
             double allyAttack, double allyDefence) {
@@ -34,15 +39,19 @@ public class Mercenary extends Enemy implements Interactable {
         this.bribeRadius = bribeRadius;
         this.allyAttack = allyAttack;
         this.allyDefence = allyDefence;
+        this.controlLength = 0;
     }
 
     public boolean isAllied() {
+        if (underControl) {
+            return true;
+        }
         return allied;
     }
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        if (allied)
+        if (isAllied())
             return;
         super.onOverlap(map, entity);
     }
@@ -53,32 +62,57 @@ public class Mercenary extends Enemy implements Interactable {
      * @return
      */
     private boolean canBeBribed(Player player) {
-        return bribeRadius >= 0 && player.countEntityOfType(Treasure.class) >= bribeAmount;
+        int treasureAmount = player.countEntityOfType(Treasure.class) - player.countEntityOfType(SunStone.class);
+        return bribeRadius >= 0 && treasureAmount >= bribeAmount;
+    }
+
+    public void setControlLength(int controlLength) {
+        this.controlLength = controlLength;
+    }
+
+    public int getControlLength() {
+        return controlLength;
+    }
+
+    public boolean isUnderControl() {
+        return underControl;
+    }
+
+    public void setUnderControl(boolean underControl) {
+        this.underControl = underControl;
+        if (underControl) {
+            allied = true;
+        } else {
+            allied = false;
+        }
     }
 
     /**
      * bribe the merc
      */
     private void bribe(Player player) {
+        int j = 0;
+        InventoryItem nextTreasure;
         for (int i = 0; i < bribeAmount; i++) {
-            player.use(Treasure.class);
+            while (j < player.getInventory().getItems().size()) {
+                nextTreasure = player.getInventory().getItems().get(j);
+                if (nextTreasure instanceof Treasure && !(nextTreasure instanceof SunStone)) {
+                    player.getInventory().remove(nextTreasure);
+                    break;
+                }
+                j++;
+            }
         }
-    }
-
-    public boolean isAdjacentToPlayer() {
-        return isAdjacentToPlayer;
-    }
-
-    public void setAdjacentToPlayer(boolean isAdjacentToPlayer) {
-        this.isAdjacentToPlayer = isAdjacentToPlayer;
     }
 
     @Override
     public void interact(Player player, Game game) {
-        allied = true;
-        bribe(player);
-        if (!isAdjacentToPlayer && Position.isAdjacent(player.getPosition(), getPosition()))
-            isAdjacentToPlayer = true;
+        if (!underControl) {
+            allied = true;
+            bribe(player);
+            if (!isAdjacentToPlayer && Position.isAdjacent(player.getPosition(), getPosition()))
+                isAdjacentToPlayer = true;
+        }
     }
 
     @Override
@@ -86,7 +120,7 @@ public class Mercenary extends Enemy implements Interactable {
         Position nextPos;
         GameMap map = game.getMap();
         Player player = game.getPlayer();
-        if (allied) {
+        if (isAllied()) {
             nextPos = isAdjacentToPlayer ? player.getPreviousDistinctPosition()
                     : map.dijkstraPathFind(getPosition(), player.getPosition(), this);
             if (!isAdjacentToPlayer && Position.isAdjacent(player.getPosition(), nextPos))
@@ -107,17 +141,31 @@ public class Mercenary extends Enemy implements Interactable {
                 map.moveTo(this, nextPos);
             }
         }
+<<<<<<< HEAD
 
+=======
+        map.moveTo(this, nextPos);
+        if (this.isUnderControl()) {
+            int length = this.getControlLength() - 1;
+            this.setControlLength(length);
+            if (length == 0) {
+                this.setUnderControl(false);
+            }
+        }
+>>>>>>> 56d8aff (Task2partd)
     }
 
     @Override
     public boolean isInteractable(Player player) {
-        return !allied && canBeBribed(player);
+        int numSceptres = player.getInventory().getEntities(Sceptre.class).size();
+        if (numSceptres > 0)
+            return true;
+        return !isAllied() && canBeBribed(player);
     }
 
     @Override
     public BattleStatistics getBattleStatistics() {
-        if (!allied)
+        if (!isAllied())
             return super.getBattleStatistics();
         return new BattleStatistics(0, allyAttack, allyDefence, 1, 1);
     }

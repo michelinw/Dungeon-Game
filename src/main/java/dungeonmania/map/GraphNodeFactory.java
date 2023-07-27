@@ -31,13 +31,13 @@ public class GraphNodeFactory {
         case "door":
         case "key":
         case "armour":
-<<<<<<< HEAD
-        case "swamp_tile":
-=======
+        case "sun_stone":
+        case "sceptre":
+        case "midnight_armour":
         case "wire":
         case "light_bulb_off":
         case "switch_door":
->>>>>>> e387e0d (refactor onOverlap allows bombs to be logic entity)
+        case "swamp_tile":
             return new GraphNode(factory.createEntity(jsonEntity));
         default:
             return null;
