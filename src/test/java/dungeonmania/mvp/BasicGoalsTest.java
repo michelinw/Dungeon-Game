@@ -132,11 +132,7 @@ public class BasicGoalsTest {
         dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_basicDestroyEnemiesGoal", "c_basicDestroyEnemiesGoalTests");
 
-<<<<<<< src/test/java/dungeonmania/mvp/BasicGoalsTest.java
         assertTrue(TestUtils.getGoals(res).contains(":enemies"));
-=======
-        assertTrue(TestUtils.getGoals(res).contains(":destroyEnemies"));
->>>>>>> src/test/java/dungeonmania/mvp/BasicGoalsTest.java
 
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.DOWN);
