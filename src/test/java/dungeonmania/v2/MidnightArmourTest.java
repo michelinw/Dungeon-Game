@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MidnightArmourTest {
     @Test
-    @DisplayName("Test sceptre craft")
+    @DisplayName("Test midnight craft")
     public void craftMidnightArmour() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
@@ -58,5 +58,22 @@ public class MidnightArmourTest {
         // materials in inventory remain since armour is not made
         assertEquals(1, TestUtils.getInventory(res, "sword").size());
         assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
+    }
+
+    @Test
+    @DisplayName("Test MidnightArmour applies buffs correctly")
+    public void midnightArmourGivesExtraProtection() {
+        DungeonManiaController dmc;
+        dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("midnightarmour_buildables", "midnight");
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
+        assertEquals(1, TestUtils.getInventory(res, "sword").size());
+        res = assertDoesNotThrow(() -> dmc.build("midnight_armour"));
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(0, TestUtils.getInventory(res, "sword").size());
+        assertEquals(0, TestUtils.getInventory(res, "sun_stone").size());
+        assertEquals(0, TestUtils.getEntities(res, "mercenary").size());
     }
 }

@@ -11,63 +11,13 @@
             "type": "boulder"
         },
         {
-            "x": 10,
-            "y": 0,
-            "type": "boulder"
-        },
-        {
-            "x": 9,
-            "y": 0,
-            "type": "boulder"
-        },
-        {
-            "x": -1,
-            "y": 0,
-            "type": "boulder"
-        },
-        {
             "x": 2,
             "y": 0,
-            "type": "switch"
-        },
-        {
-            "x": -1,
-            "y": 1,
-            "type": "switch"
-        },
-        {
-            "x": 4,
-            "y": -1,
-            "type": "switch"
-        },
-        {
-            "x": 4,
-            "y": -3,
             "type": "switch"
         },
         {
             "x": 3,
-            "y": -2,
-            "type": "switch"
-        },
-        {
-            "x": 5,
-            "y": -2,
-            "type": "switch"
-        },
-        {
-            "x": 2,
-            "y": 1,
-            "type": "wire"
-        },
-        {
-            "x": 4,
-            "y": 1,
-            "type": "wire"
-        },
-        {
-            "x": 4,
-            "y": 2,
+            "y": 0,
             "type": "wire"
         },
         {
@@ -76,67 +26,73 @@
             "type": "wire"
         },
         {
-            "x": 3,
-            "y": 2,
+            "x": 5,
+            "y": 0,
+            "type": "light_bulb_off",
+            "logic": "coand"
+        },
+        {
+            "x": 4,
+            "y": 1,
             "type": "wire"
-        },
-        {
-            "x": -1,
-            "y": 2,
-            "type": "wire"
-        },
-        {
-            "x": 0,
-            "y": 2,
-            "type": "wire"
-        },
-        {
-            "x": -2,
-            "y": 2,
-            "type": "wire"
-        },
-        {
-            "x": -2,
-            "y": 3,
-            "type": "wire"
-        },
-        {
-            "x": 0,
-            "y": 3,
-            "type": "wire"
-        },
-        {
-            "x": -2,
-            "y": 4,
-            "type": "wire"
-        },
-        {
-            "x": 0,
-            "y": 4,
-            "type": "wire"
-        },
-        {
-            "x": 2,
-            "y": 2,
-            "type": "bomb",
-            "logic": "and"
-        },
-        {
-            "x": -1,
-            "y": 4,
-            "type": "bomb",
-            "logic": "co_and"
         },
         {
             "x": 5,
-            "y": 5,
+            "y": 1,
+            "type": "wire"
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "type": "light_bulb_off",
+            "logic": "xor"
+        },
+        {
+            "x": 3,
+            "y": 2,
             "type": "switch_door",
+            "logic": "or"
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "type": "light_bulb_off",
             "logic": "and"
         },
         {
             "x": 3,
             "y": 3,
             "type": "exit"
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "type": "wire"
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "type": "boulder"
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "type": "switch"
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "type": "wire"
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "type": "wire"
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "type": "wire"
         }
     ],
     "goal-condition": {

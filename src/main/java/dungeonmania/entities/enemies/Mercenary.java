@@ -81,7 +81,11 @@ public class Mercenary extends Enemy implements Interactable {
 
     public void setUnderControl(boolean underControl) {
         this.underControl = underControl;
-        this.allied = true;
+        if (underControl) {
+            allied = true;
+        } else {
+            allied = false;
+        }
     }
 
     /**
@@ -144,6 +148,7 @@ public class Mercenary extends Enemy implements Interactable {
         }
         map.moveTo(this, nextPos);
         if (this.isUnderControl()) {
+            System.out.println("a");
             int length = this.getControlLength() - 1;
             this.setControlLength(length);
             if (length == 0) {
