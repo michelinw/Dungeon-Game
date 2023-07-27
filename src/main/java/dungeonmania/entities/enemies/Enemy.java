@@ -13,6 +13,8 @@ public abstract class Enemy extends Entity implements Battleable {
     private BattleStatistics battleStatistics;
     private MovementStrategy nextPositionStrategy;
 
+    private int ticksStuckInSwamp = 0;
+
     public void setNextPositionStrategy(MovementStrategy nextPositionStrategy) {
         this.nextPositionStrategy = nextPositionStrategy;
     }
@@ -52,4 +54,16 @@ public abstract class Enemy extends Entity implements Battleable {
     }
 
     public abstract void move(Game game);
+
+    public boolean isStuck() {
+        if (ticksStuckInSwamp != 0) {
+            ticksStuckInSwamp -= 1;
+            return true;
+        }
+        return false;
+    }
+
+    public void setTicksStuckInSwamp(int stuck) {
+        ticksStuckInSwamp = stuck;
+    }
 }

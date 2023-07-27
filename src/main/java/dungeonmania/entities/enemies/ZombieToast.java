@@ -16,13 +16,15 @@ public class ZombieToast extends Enemy {
 
     @Override
     public void move(Game game) {
-        if (game.getPlayer().getEffectivePotion() instanceof InvisibilityPotion) {
-            setNextPositionStrategy(new InvisibilityMovementStrategy());
-        } else {
-            setNextPositionStrategy(new DefaultRandomMovementStrategy());
+        if (!this.isStuck()) {
+            if (game.getPlayer().getEffectivePotion() instanceof InvisibilityPotion) {
+                setNextPositionStrategy(new InvisibilityMovementStrategy());
+            } else {
+                setNextPositionStrategy(new DefaultRandomMovementStrategy());
+            }
+            Position nextPos = getNextPosition(game);
+            game.getMap().moveTo(this, nextPos);
         }
-        Position nextPos = getNextPosition(game);
-        game.getMap().moveTo(this, nextPos);
     }
 
 }

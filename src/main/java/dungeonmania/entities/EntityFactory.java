@@ -4,7 +4,6 @@ import dungeonmania.Game;
 import dungeonmania.entities.buildables.Bow;
 import dungeonmania.entities.buildables.Shield;
 import dungeonmania.entities.collectables.*;
-import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.enemies.*;
 import dungeonmania.map.GameMap;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
@@ -173,6 +172,9 @@ public class EntityFactory {
             return new Key(pos, jsonEntity.getInt("key"));
         case "armour":
             return new Armour(pos);
+        case "swamp_tile":
+            int movement = jsonEntity.getInt("movement_factor");
+            return new SwampTile(pos, movement);
         default:
             return null;
         }
