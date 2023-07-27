@@ -132,7 +132,7 @@ public class BasicGoalsTest {
         dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_basicDestroyEnemiesGoal", "c_basicDestroyEnemiesGoalTests");
 
-        assertTrue(TestUtils.getGoals(res).contains(":destroyEnemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
 
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.DOWN);
@@ -142,6 +142,6 @@ public class BasicGoalsTest {
         String id = TestUtils.getEntities(res, "zombie_toast_spawner").get(0).getId();
         res = dmc.interact(id);
 
-        assertFalse(TestUtils.getGoals(res).contains(":destroyEnemies"));
+        assertFalse(TestUtils.getGoals(res).contains(":enemies"));
     }
 }
