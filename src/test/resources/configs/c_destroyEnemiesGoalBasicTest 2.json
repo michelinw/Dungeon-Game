@@ -22,9 +22,5 @@
     "zombie_attack": 5,
     "zombie_health": 5,
     "zombie_spawn_interval": 5,
-<<<<<<< HEAD
     "enemy_goal": 1
-=======
-    "enemies_goal": 1
->>>>>>> 4acc102 (Finished basic tests and implementation, pulling files and updating branch, editing merge conflicts.)
 }

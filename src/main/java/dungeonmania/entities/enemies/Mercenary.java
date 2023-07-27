@@ -141,13 +141,6 @@ public class Mercenary extends Enemy implements Interactable {
                 map.moveTo(this, nextPos);
             }
         }
-        if (this.isUnderControl()) {
-            int length = this.getControlLength() - 1;
-            this.setControlLength(length);
-            if (length == 0) {
-                this.setUnderControl(false);
-            }
-        }
     }
 
     @Override
