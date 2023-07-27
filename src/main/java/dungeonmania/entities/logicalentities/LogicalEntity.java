@@ -9,6 +9,7 @@ import java.util.List;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 import dungeonmania.entities.conductable.*;
+import dungeonmania.entities.logicalentities.logicStrategy.*;
 
 public class LogicalEntity extends Entity {
     private int activatedTick = -1; // -1 means it is not activated by default
@@ -33,55 +34,8 @@ public class LogicalEntity extends Entity {
         adjacentLogicalEntities.remove(e);
     }
 
-    private boolean isAndActivated() {
-        boolean isAct = true;
-        // System.out.println("adjacentLogicalEntities.size(): " + adjacentLogicalEntities.size());
-
-        // for (int i = 0; i < adjacentLogicalEntities.size(); i++) {
-        //     Entity entity = (Entity) adjacentLogicalEntities.get(i);
-        //     System.out.println(entity.getPosition() + " " + entity.getClass() + " " + entity.toString());
-        // }
-        for (LogicalEntity e : adjacentLogicalEntities) {
-            if (!e.isActivatedTick()) {
-                isAct = false;
-                break;
-            }
-        }
-        return isAct;
-    }
-
-    private boolean isOrActivated() {
-        boolean isAct = false;
-        for (LogicalEntity e : adjacentLogicalEntities) {
-            if (e.isActivatedTick()) {
-                isAct = true;
-                break;
-            }
-        }
-        return isAct;
-    }
-
-    private boolean isXorActivated() {
-        int actCount = 0;
-        for (LogicalEntity e : adjacentLogicalEntities) {
-            if (e.isActivatedTick()) {
-                actCount++;
-            }
-        }
-        return actCount == 1;
-    }
-
-    private boolean isCoAndActivated(int tick) {
-        boolean isAct = true;
-        int coAndTick = adjacentLogicalEntities.get(0).getActivatedTick();
-        for (LogicalEntity e : adjacentLogicalEntities) {
-            // not activated or not activated in the same tick
-            if (!e.isActivatedTick() || (e.getActivatedTick() != coAndTick)) {
-                isAct = false;
-                break;
-            }
-        }
-        return isAct;
+    public List<LogicalEntity> getAdjacentLogicalEntities() {
+        return adjacentLogicalEntities;
     }
 
     public boolean isActivatedLogicalEntity(int tick, boolean activatedAction) {
@@ -93,16 +47,20 @@ public class LogicalEntity extends Entity {
                 isAct = activatedAction;
                 break;
             case Rule.AND:
-                isAct = isAndActivated();
+                AndRule andRule = new AndRule();
+                isAct = andRule.isActive(tick, this);
                 break;
             case Rule.OR:
-                isAct = isOrActivated();
+                OrRule orRule = new OrRule();
+                isAct = orRule.isActive(tick, this);
                 break;
             case Rule.XOR:
-                isAct = isXorActivated();
+                XorRule xorRule = new XorRule();
+                isAct = xorRule.isActive(tick, this);
                 break;
             case Rule.CO_AND:
-                isAct = isCoAndActivated(tick);
+                CoAndRule coAndRule = new CoAndRule();
+                isAct = coAndRule.isActive(tick, this);
                 break;
             default:
                 isAct = false;
