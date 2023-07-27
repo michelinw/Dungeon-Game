@@ -1,9 +1,9 @@
-package dungeonmania.v2;
+package dungeonmania.Task2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.Tag;
 import dungeonmania.DungeonManiaController;
 import dungeonmania.mvp.TestUtils;
 import dungeonmania.response.models.DungeonResponse;
@@ -11,6 +11,7 @@ import dungeonmania.util.Direction;
 
 public class ArmourTest {
     @Test
+    @Tag("16-1")
     public void pickUpArmour() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
