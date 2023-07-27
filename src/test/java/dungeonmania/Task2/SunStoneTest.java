@@ -1,4 +1,4 @@
-package dungeonmania.v2;
+package dungeonmania.Task2;
 
 import dungeonmania.DungeonManiaController;
 import dungeonmania.exceptions.InvalidActionException;
