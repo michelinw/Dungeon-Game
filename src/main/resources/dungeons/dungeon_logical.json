@@ -116,6 +116,11 @@
             "type": "wire"
         },
         {
+            "x": -1,
+            "y": 3,
+            "type": "wire"
+        },
+        {
             "x": 2,
             "y": 2,
             "type": "bomb",
@@ -124,7 +129,7 @@
         {
             "x": -1,
             "y": 4,
-            "type": "bomb",
+            "type": "light_bulb_off",
             "logic": "co_and"
         },
         {

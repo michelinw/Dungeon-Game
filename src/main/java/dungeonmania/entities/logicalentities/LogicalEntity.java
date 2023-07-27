@@ -9,6 +9,7 @@ import java.util.List;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 import dungeonmania.entities.conductable.*;
+import dungeonmania.entities.logicalentities.logicStrategy.*;
 
 public class LogicalEntity extends Entity {
     private int activatedTick = -1; // -1 means it is not activated by default
@@ -33,6 +34,7 @@ public class LogicalEntity extends Entity {
         adjacentLogicalEntities.remove(e);
     }
 
+<<<<<<< Updated upstream
     private boolean isAndActivated() {
         boolean isAct = true;
 
@@ -77,6 +79,10 @@ public class LogicalEntity extends Entity {
             }
         }
         return isAct;
+=======
+    public List<LogicalEntity> getAdjacentLogicalEntities() {
+        return adjacentLogicalEntities;
+>>>>>>> Stashed changes
     }
 
     public boolean isActivatedLogicalEntity(int tick, boolean activatedAction) {
@@ -88,16 +94,20 @@ public class LogicalEntity extends Entity {
                 isAct = activatedAction;
                 break;
             case Rule.AND:
-                isAct = isAndActivated();
+                AndRule andRule = new AndRule();
+                isAct = andRule.isActive(tick, this);
                 break;
             case Rule.OR:
-                isAct = isOrActivated();
+                OrRule orRule = new OrRule();
+                isAct = orRule.isActive(tick, this);
                 break;
             case Rule.XOR:
-                isAct = isXorActivated();
+                XorRule xorRule = new XorRule();
+                isAct = xorRule.isActive(tick, this);
                 break;
             case Rule.CO_AND:
-                isAct = isCoAndActivated(tick);
+                CoAndRule coAndRule = new CoAndRule();
+                isAct = coAndRule.isActive(tick, this);
                 break;
             default:
                 isAct = false;
