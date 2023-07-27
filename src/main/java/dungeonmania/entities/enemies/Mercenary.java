@@ -6,9 +6,10 @@ import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.collectables.Treasure;
+import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrategy;
-import dungeonmania.entities.enemies.movementStrategy.InvisibilityMovementStrategy;
+import dungeonmania.entities.enemies.movementStrategy.PlayerInvincibilityEnemyMovement;
 import dungeonmania.map.GameMap;
 
 import dungeonmania.util.Position;
@@ -95,13 +96,11 @@ public class Mercenary extends Enemy implements Interactable {
                 setNextPositionStrategy(new DefaultRandomMovementStrategy());
                 nextPos = getNextPosition(game);
             }
+        } else if (player.getEffectivePotion() instanceof InvincibilityPotion) {
+            setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
+            nextPos = getNextPosition(game);
         } else {
-            if (player.getEffectivePotion() instanceof InvisibilityPotion) {
-                setNextPositionStrategy(new InvisibilityMovementStrategy());
-                nextPos = getNextPosition(game);
-            } else {
-                nextPos = map.dijkstraPathFind(getPosition(), player.getPosition(), this);
-            }
+            nextPos = map.dijkstraPathFind(getPosition(), player.getPosition(), this);
         }
         map.moveTo(this, nextPos);
     }
