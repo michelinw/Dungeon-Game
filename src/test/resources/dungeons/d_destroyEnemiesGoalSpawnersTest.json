@@ -6,19 +6,19 @@
             "y": 1
         },
         {
-            "type": "mercenary",
+            "type": "sword",
+            "x": 1,
+            "y": 2
+        },
+        {
+            "type": "zombie_toast_spawner",
             "x": 1,
             "y": 3
         },
         {
             "type": "zombie_toast_spawner",
             "x": 1,
-            "y": 5
-        },
-        {
-            "type": "sword",
-            "x": 1,
-            "y": 2
+            "y": 4
         }
     ],
     "goal-condition": {

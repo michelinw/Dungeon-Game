@@ -1,7 +1,6 @@
 package dungeonmania.mvp;
 
 import dungeonmania.DungeonManiaController;
-import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import org.junit.jupiter.api.DisplayName;
@@ -123,6 +122,7 @@ public class BasicGoalsTest {
         // assert goal met
         assertEquals("", TestUtils.getGoals(res));
     }
+<<<<<<< HEAD
 
     @Test
     @Tag("13-5")
@@ -144,4 +144,6 @@ public class BasicGoalsTest {
 
         assertFalse(TestUtils.getGoals(res).contains(":enemies"));
     }
+=======
+>>>>>>> 1180435 (Finished tests for task 2 part A)
 }
