@@ -122,28 +122,4 @@ public class BasicGoalsTest {
         // assert goal met
         assertEquals("", TestUtils.getGoals(res));
     }
-<<<<<<< HEAD
-
-    @Test
-    @Tag("13-5")
-    @DisplayName("Testing destroying enemies goal")
-    public void destoryEnemiesGoal() throws InvalidActionException {
-        DungeonManiaController dmc;
-        dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_basicDestroyEnemiesGoal", "c_basicDestroyEnemiesGoalTests");
-
-        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
-
-        res = dmc.tick(Direction.DOWN);
-        res = dmc.tick(Direction.DOWN);
-        res = dmc.tick(Direction.DOWN);
-        res = dmc.tick(Direction.DOWN);
-
-        String id = TestUtils.getEntities(res, "zombie_toast_spawner").get(0).getId();
-        res = dmc.interact(id);
-
-        assertFalse(TestUtils.getGoals(res).contains(":enemies"));
-    }
-=======
->>>>>>> 1180435 (Finished tests for task 2 part A)
 }
