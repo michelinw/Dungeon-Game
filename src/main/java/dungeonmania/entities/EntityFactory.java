@@ -2,9 +2,10 @@ package dungeonmania.entities;
 
 import dungeonmania.Game;
 import dungeonmania.entities.buildables.Bow;
+import dungeonmania.entities.buildables.MidnightArmour;
+import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.buildables.Shield;
 import dungeonmania.entities.collectables.*;
-import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.enemies.*;
 import dungeonmania.entities.logicalentities.LightBulb;
 import dungeonmania.entities.logicalentities.Rule;
@@ -126,6 +127,17 @@ public class EntityFactory {
         return new Shield(shieldDurability, shieldDefence);
     }
 
+    public MidnightArmour buildMidnightArmour() {
+        double midnightAttack = config.optInt("midnight_armour_attack");
+        double midnightDefence = config.optInt("midnight_armour_defence");
+        return new MidnightArmour(midnightAttack, midnightDefence);
+    }
+
+    public Sceptre buildSceptre() {
+        int controlLength = config.optInt("mind_control_duration");
+        return new Sceptre(controlLength);
+    }
+
     private Entity constructEntity(JSONObject jsonEntity, JSONObject config) {
         Position pos = new Position(jsonEntity.getInt("x"), jsonEntity.getInt("y"));
 
@@ -138,6 +150,10 @@ public class EntityFactory {
             return buildZombieToastSpawner(pos);
         case "mercenary":
             return buildMercenary(pos);
+        case "sceptre":
+            return buildSceptre();
+        case "midnight_armour":
+            return buildMidnightArmour();
         case "wall":
             return new Wall(pos);
         case "boulder":
@@ -152,6 +168,8 @@ public class EntityFactory {
             return new Wood(pos);
         case "arrow":
             return new Arrow(pos);
+        case "sun_stone":
+            return new SunStone(pos);
         case "bomb":
             int bombRadius = config.optInt("bomb_radius", Bomb.DEFAULT_RADIUS);
             return jsonEntity.has("logic") ? new Bomb(pos, bombRadius, jsonEntity.getString("logic"))
@@ -190,4 +208,5 @@ public class EntityFactory {
             return null;
         }
     }
+
 }
