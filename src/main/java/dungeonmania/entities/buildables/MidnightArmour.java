@@ -2,8 +2,9 @@ package dungeonmania.entities.buildables;
 
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
+import dungeonmania.entities.BattleItem;
 
-public class MidnightArmour extends Buildable {
+public class MidnightArmour extends Buildable implements BattleItem {
     private int durability;
     private double defence;
     private double attack;

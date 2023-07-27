@@ -62,7 +62,6 @@ public class Mercenary extends Enemy implements Interactable {
      * @return
      */
     private boolean canBeBribed(Player player) {
-
         int treasureAmount = player.countEntityOfType(Treasure.class) - player.countEntityOfType(SunStone.class);
         return bribeRadius >= 0 && treasureAmount >= bribeAmount;
     }
@@ -104,14 +103,6 @@ public class Mercenary extends Enemy implements Interactable {
                 j++;
             }
         }
-    }
-
-    public boolean isAdjacentToPlayer() {
-        return isAdjacentToPlayer;
-    }
-
-    public void setAdjacentToPlayer(boolean isAdjacentToPlayer) {
-        this.isAdjacentToPlayer = isAdjacentToPlayer;
     }
 
     @Override

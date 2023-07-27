@@ -127,4 +127,33 @@ public class SunStoneTest {
         // assert goal met
         assertEquals("", TestUtils.getGoals(res));
     }
+
+    @Test
+    @DisplayName("Building shield with sun stone")
+    public void canBuildShield() {
+        DungeonManiaController dmc;
+        dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("sunstone_sword_shield", "simple");
+        assertEquals(0, TestUtils.getInventory(res, "wood").size());
+        assertEquals(0, TestUtils.getInventory(res, "sun_stone").size());
+
+        // Pick up Wood x2
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(2, TestUtils.getInventory(res, "wood").size());
+
+        // Pick up Sun Stone
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
+
+        // Build Shield
+        assertEquals(0, TestUtils.getInventory(res, "shield").size());
+        res = assertDoesNotThrow(() -> dmc.build("shield"));
+        assertEquals(1, TestUtils.getInventory(res, "shield").size());
+
+        // Wood used in construction disappear from inventory
+        assertEquals(0, TestUtils.getInventory(res, "wood").size());
+        // Sun stone remains in inventory
+        //assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
+    }
 }

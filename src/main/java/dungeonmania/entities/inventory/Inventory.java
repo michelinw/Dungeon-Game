@@ -73,12 +73,11 @@ public class Inventory {
             }
             return factory.buildBow();
 
-        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1)) {
+        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1 || sunStone.size() >= 1)) {
             if (remove) {
                 items.remove(wood.get(0));
                 items.remove(wood.get(1));
                 if (treasure.size() >= 1) {
-                    // use sunStone if u have
                     items.remove(treasure.get(0));
                 } else {
                     items.remove(keys.get(0));
