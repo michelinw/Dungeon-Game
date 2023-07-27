@@ -141,10 +141,6 @@ public class Mercenary extends Enemy implements Interactable {
                 map.moveTo(this, nextPos);
             }
         }
-<<<<<<< HEAD
-
-=======
-        map.moveTo(this, nextPos);
         if (this.isUnderControl()) {
             int length = this.getControlLength() - 1;
             this.setControlLength(length);
@@ -152,7 +148,6 @@ public class Mercenary extends Enemy implements Interactable {
                 this.setUnderControl(false);
             }
         }
->>>>>>> 56d8aff (Task2partd)
     }
 
     @Override
@@ -169,4 +164,9 @@ public class Mercenary extends Enemy implements Interactable {
             return super.getBattleStatistics();
         return new BattleStatistics(0, allyAttack, allyDefence, 1, 1);
     }
+
+    public boolean isAdjacentToPlayer() {
+        return isAdjacentToPlayer;
+    }
+
 }
