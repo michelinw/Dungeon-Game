@@ -144,5 +144,12 @@ public class SceptreTest {
 
         res = dmc.tick(Direction.RIGHT);
         assertEquals(0, res.getBattles().size());
+
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.LEFT);
+        assertEquals(0, res.getBattles().size());
+
     }
 }

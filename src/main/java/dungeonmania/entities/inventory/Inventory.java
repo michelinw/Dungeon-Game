@@ -96,8 +96,15 @@ public class Inventory {
         } else if ((wood.size() >= 1 || arrows.size() >= 2) && (keys.size() >= 1 || treasure.size() >= 1)
                 && sunStone.size() >= 1) {
             if (remove) {
-                // If we have 2 sunStones, use them both
-                if (wood.size() >= 1 && keys.size() >= 1 && sunStone.size() >= 1) {
+                if (wood.size() >= 1 && sunStone.size() >= 2) {
+                    items.remove(sunStone.get(1));
+                    items.remove(sunStone.get(0));
+                } else if (arrows.size() >= 2 && sunStone.size() >= 2) {
+                    items.remove(arrows.get(1));
+                    items.remove(arrows.get(0));
+                    items.remove(sunStone.get(1));
+                    items.remove(sunStone.get(0));
+                } else if (wood.size() >= 1 && keys.size() >= 1 && sunStone.size() >= 1) {
                     items.remove(wood.get(0));
                     items.remove(keys.get(0));
                     items.remove(sunStone.get(0));

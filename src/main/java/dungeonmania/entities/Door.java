@@ -46,7 +46,6 @@ public class Door extends Entity {
         if (hasSunStone)
             return true;
         Key key = inventory.getFirst(Key.class);
-
         return (key != null && key.getnumber() == number);
     }
 

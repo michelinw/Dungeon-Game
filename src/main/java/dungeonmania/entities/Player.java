@@ -6,7 +6,6 @@ import java.util.Queue;
 
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.battles.Battleable;
-import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
@@ -48,10 +47,6 @@ public class Player extends Entity implements Battleable {
 
     public boolean hasWeapon() {
         return inventory.hasWeapon();
-    }
-
-    public BattleItem getWeapon() {
-        return inventory.getWeapon();
     }
 
     public List<String> getBuildables() {
@@ -181,17 +176,5 @@ public class Player extends Entity implements Battleable {
             return BattleStatistics.applyBuff(origin, new BattleStatistics(0, 0, 0, 1, 1, false, false));
         }
         return origin;
-    }
-
-    public boolean hasSceptre() {
-        return inventory.hasSceptre();
-    }
-
-    public Sceptre getSceptre() {
-        return inventory.getSceptre();
-    }
-
-    public boolean hasSunStone() {
-        return inventory.hasSunStone();
     }
 }
