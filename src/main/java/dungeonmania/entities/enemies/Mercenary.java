@@ -11,7 +11,6 @@ import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrategy;
-import dungeonmania.entities.enemies.movementStrategy.InvisibilityMovementStrategy;
 import dungeonmania.entities.enemies.movementStrategy.PlayerInvincibilityEnemyMovement;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
