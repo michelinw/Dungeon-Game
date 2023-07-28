@@ -5,7 +5,7 @@ import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
-public class InvisibilityMovementStrategy implements MovementStrategy {
+public class PlayerInvincibilityEnemyMovement implements MovementStrategy {
     @Override
     public Position getNextPosition(Enemy enemy, Game game) {
         Position plrDiff = Position.calculatePositionBetween(game.getMap().getPlayer().getPosition(),

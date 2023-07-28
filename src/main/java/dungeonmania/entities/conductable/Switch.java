@@ -1,8 +1,8 @@
-package dungeonmania.entities;
+package dungeonmania.entities.conductable;
 
+import dungeonmania.entities.Boulder;
+import dungeonmania.entities.Entity;
 import dungeonmania.entities.collectables.Bomb;
-import dungeonmania.entities.conductable.Conductor;
-import dungeonmania.entities.logicalentities.LogicBombActivator;
 import dungeonmania.entities.logicalentities.Rule;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;

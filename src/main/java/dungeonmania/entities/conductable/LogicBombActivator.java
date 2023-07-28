@@ -1,4 +1,4 @@
-package dungeonmania.entities.logicalentities;
+package dungeonmania.entities.conductable;
 
 import dungeonmania.util.Position;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeonmania.entities.collectables.Bomb;
+import dungeonmania.entities.logicalentities.LogicalEntity;
 import dungeonmania.map.GameMap;
 
 public class LogicBombActivator extends LogicalEntity {
