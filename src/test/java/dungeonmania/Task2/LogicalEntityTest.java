@@ -45,7 +45,7 @@ public class LogicalEntityTest {
     @DisplayName("Test and and xor bombs")
     public void bombTests() throws InvalidActionException {
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_2", "simple");
+        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_2", "c_simple");
         // Player moves boulder onto switch, activating circuit, turning on lightbulb and opening switch door
         res = dmc.tick(Direction.RIGHT);
         assertTrue(boulderAt(res, 2, 0));
@@ -100,7 +100,7 @@ public class LogicalEntityTest {
     @DisplayName("Test coand bomb")
     public void coAndTest() throws IllegalArgumentException, InvalidActionException {
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_3", "simple");
+        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_3", "c_simple");
         assertEquals(12, TestUtils.countType(res, "wire"));
 
         res = dmc.tick(Direction.DOWN);
@@ -128,7 +128,7 @@ public class LogicalEntityTest {
     @DisplayName("Test or bomb")
     public void orBombTest() throws IllegalArgumentException, InvalidActionException {
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_6", "simple");
+        DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_6", "c_simple");
         assertEquals(2, TestUtils.countType(res, "wire"));
 
         res = dmc.tick(Direction.DOWN);
@@ -146,7 +146,7 @@ public class LogicalEntityTest {
 
     @Test
     @Tag("18-4")
-    @DisplayName("Test ")
+    @DisplayName("Test complex")
     public void moreLightBulbAndSwitchDoorTests() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_4", "c_logicalEntitiesTest_1");
@@ -173,7 +173,7 @@ public class LogicalEntityTest {
 
     @Test
     @Tag("18-5")
-    @DisplayName("Test ")
+    @DisplayName("Test complex 2")
     public void evenMoreLightBulbAndSwitchDoors() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_5", "c_logicalEntitiesTest_1");

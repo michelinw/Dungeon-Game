@@ -13,6 +13,7 @@ import dungeonmania.entities.logicalentities.SwitchDoor;
 import dungeonmania.map.GameMap;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
+import dungeonmania.entities.conductable.Switch;
 import dungeonmania.entities.conductable.Wire;
 import dungeonmania.util.Position;
 
