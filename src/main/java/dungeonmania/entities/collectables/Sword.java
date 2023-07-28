@@ -3,12 +3,10 @@ package dungeonmania.entities.collectables;
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.BattleItem;
-import dungeonmania.entities.Entity;
 import dungeonmania.entities.inventory.InventoryItem;
-import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Sword extends Entity implements BattleItem, InventoryItem {
+public class Sword extends CollectibleEntity implements BattleItem, InventoryItem {
     public static final double DEFAULT_ATTACK = 1;
     public static final double DEFAULT_ATTACK_SCALE_FACTOR = 1;
     public static final int DEFAULT_DURABILITY = 5;
@@ -22,11 +20,6 @@ public class Sword extends Entity implements BattleItem, InventoryItem {
         super(position);
         this.attack = attack;
         this.durability = durability;
-    }
-
-    @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return true;
     }
 
     @Override
