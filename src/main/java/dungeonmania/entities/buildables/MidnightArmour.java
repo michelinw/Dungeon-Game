@@ -1,11 +1,9 @@
 package dungeonmania.entities.buildables;
 
-import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.BattleItem;
 
 public class MidnightArmour extends Buildable implements BattleItem {
-    private int durability;
     private double defence;
     private double attack;
 
@@ -18,16 +16,5 @@ public class MidnightArmour extends Buildable implements BattleItem {
     @Override
     public BattleStatistics applyBuff(BattleStatistics origin) {
         return BattleStatistics.applyBuff(origin, new BattleStatistics(0, attack, defence, 1, 1));
-
-    }
-
-    @Override
-    public void use(Game game) {
-        return;
-    }
-
-    @Override
-    public int getDurability() {
-        return durability;
     }
 }
