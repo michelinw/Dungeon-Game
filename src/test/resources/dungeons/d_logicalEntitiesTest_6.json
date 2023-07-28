@@ -28,7 +28,8 @@
         {
             "x": 3,
             "y": 5,
-            "type": "bomb"
+            "type": "bomb",
+            "logic": "or"
         }
     ],
     "goal-condition": {

@@ -3,7 +3,6 @@ package dungeonmania.entities.conductable;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.logicalentities.Rule;
-import dungeonmania.entities.logicalentities.LogicBombActivator;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
