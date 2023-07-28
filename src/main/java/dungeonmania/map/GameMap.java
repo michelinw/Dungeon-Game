@@ -116,7 +116,7 @@ public class GameMap {
             return;
         triggerMovingAwayEvent(entity);
         removeNode(entity);
-        entity.translate(direction);
+        entity.setPosition(Position.translateBy(entity.getPosition(), direction));
         addEntity(entity);
         triggerOverlapEvent(entity);
     }
