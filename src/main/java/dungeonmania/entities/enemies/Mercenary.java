@@ -132,8 +132,8 @@ public class Mercenary extends Enemy implements Interactable {
             map.moveTo(this, nextPos);
         } else if (player.getEffectivePotion() instanceof InvincibilityPotion) {
             if (!this.isStuck()) {
-                    setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
-                    nextPos = getNextPosition(game);
+                setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
+                nextPos = getNextPosition(game);
             }
         } else {
             if (!this.isStuck()) {

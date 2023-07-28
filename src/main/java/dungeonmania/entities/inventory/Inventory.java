@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import dungeonmania.entities.BattleItem;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.UsableBattleItem;
 import dungeonmania.entities.buildables.Bow;
 import dungeonmania.entities.buildables.MidnightArmour;
 import dungeonmania.entities.buildables.Sceptre;
@@ -188,16 +188,13 @@ public class Inventory {
         return getFirst(Sword.class) != null || getFirst(Bow.class) != null || getFirst(MidnightArmour.class) != null;
     }
 
-    public BattleItem getWeapon() {
-        BattleItem weapon1 = getFirst(Sword.class);
-        BattleItem weapon2 = getFirst(Bow.class);
-        BattleItem weapon3 = getFirst(MidnightArmour.class);
-        if (weapon1 == null && weapon2 == null) {
-            return weapon3;
-        } else if (weapon2 == null && weapon3 == null) {
-            return weapon1;
+    public UsableBattleItem getWeapon() {
+        UsableBattleItem weapon1 = getFirst(Sword.class);
+        UsableBattleItem weapon2 = getFirst(Bow.class);
+        if (weapon1 == null) {
+            return weapon2;
         }
-        return weapon2;
+        return weapon1;
     }
 
     public List<InventoryItem> getItems() {

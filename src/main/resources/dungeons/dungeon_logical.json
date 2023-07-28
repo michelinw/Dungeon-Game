@@ -29,7 +29,11 @@
             "x": 5,
             "y": 0,
             "type": "light_bulb_off",
+<<<<<<< HEAD
+            "logic": "coand"
+=======
             "logic": "co_and"
+>>>>>>> master
         },
         {
             "x": 4,
@@ -109,7 +113,11 @@
             "x": 5,
             "y": 2,
             "type": "light_bulb_off",
+<<<<<<< HEAD
+            "logic": "and"
+=======
             "logic": "or"
+>>>>>>> master
         },
         {
             "x": 3,
