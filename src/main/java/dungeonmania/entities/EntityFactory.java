@@ -204,6 +204,9 @@ public class EntityFactory {
         case "switch_door":
             String sdLogicalRule = jsonEntity.getString("logic");
             return new SwitchDoor(pos, sdLogicalRule);
+        case "swamp_tile":
+            int movement = jsonEntity.getInt("movement_factor");
+            return new SwampTile(pos, movement);
         default:
             return null;
         }

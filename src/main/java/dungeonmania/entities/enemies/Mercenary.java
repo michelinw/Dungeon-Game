@@ -130,13 +130,18 @@ public class Mercenary extends Enemy implements Interactable {
                 setNextPositionStrategy(new DefaultRandomMovementStrategy());
                 nextPos = getNextPosition(game);
             }
+            map.moveTo(this, nextPos);
         } else if (player.getEffectivePotion() instanceof InvincibilityPotion) {
-            setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
-            nextPos = getNextPosition(game);
+            if (!this.isStuck()) {
+                    setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
+                    nextPos = getNextPosition(game);
+            }
         } else {
-            nextPos = map.dijkstraPathFind(getPosition(), player.getPosition(), this);
+            if (!this.isStuck()) {
+                nextPos = map.dijkstraPathFind(getPosition(), player.getPosition(), this);
+                map.moveTo(this, nextPos);
+            }
         }
-        map.moveTo(this, nextPos);
         if (this.isUnderControl()) {
             int length = this.getControlLength() - 1;
             this.setControlLength(length);
@@ -160,4 +165,9 @@ public class Mercenary extends Enemy implements Interactable {
             return super.getBattleStatistics();
         return new BattleStatistics(0, allyAttack, allyDefence, 1, 1);
     }
+
+    public boolean isAdjacentToPlayer() {
+        return isAdjacentToPlayer;
+    }
+
 }
