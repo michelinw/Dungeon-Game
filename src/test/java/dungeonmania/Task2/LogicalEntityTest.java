@@ -1,4 +1,4 @@
-package dungeonmania.v2;
+package dungeonmania.Task2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -20,7 +20,7 @@ public class LogicalEntityTest {
     }
 
     @Test
-    @Tag("3-1")
+    @Tag("18-1")
     @DisplayName("Test pushing a boulder onto switch, activating lightbulb and opening switch door")
     public void lightBulbAndSwitchDoorTest() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -41,7 +41,7 @@ public class LogicalEntityTest {
     }
 
     @Test
-    @Tag("3-2")
+    @Tag("18-2")
     @DisplayName("Test and and xor bombs")
     public void bombTests() throws InvalidActionException {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -96,7 +96,7 @@ public class LogicalEntityTest {
     }
 
     @Test
-    @Tag("3-3")
+    @Tag("18-3")
     @DisplayName("Test coand bomb")
     public void coAndTest() throws IllegalArgumentException, InvalidActionException {
         DungeonManiaController dmc = new DungeonManiaController();

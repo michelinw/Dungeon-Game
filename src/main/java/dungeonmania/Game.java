@@ -9,9 +9,12 @@ import dungeonmania.entities.Entity;
 import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.collectables.potions.Potion;
 import dungeonmania.entities.enemies.Enemy;
+import dungeonmania.entities.enemies.Mercenary;
+import dungeonmania.entities.enemies.ZombieToast;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.goals.Goal;
 import dungeonmania.map.GameMap;
@@ -26,6 +29,7 @@ public class Game {
     private BattleFacade battleFacade;
     private EntityFactory entityFactory;
     private boolean isInTick = false;
+    private int numEnemiesDestroyed;
     public static final int PLAYER_MOVEMENT = 0;
     public static final int PLAYER_MOVEMENT_CALLBACK = 1;
     public static final int AI_MOVEMENT = 2;
@@ -42,6 +46,7 @@ public class Game {
         this.name = dungeonName;
         this.map = new GameMap();
         this.battleFacade = new BattleFacade();
+        this.numEnemiesDestroyed = 0;
     }
 
     public void init() {
@@ -82,6 +87,7 @@ public class Game {
         }
         if (enemy.getBattleStatistics().getHealth() <= 0) {
             map.destroyEntity(enemy);
+            numEnemiesDestroyed++;
         }
     }
 
@@ -89,6 +95,8 @@ public class Game {
         List<String> buildables = player.getBuildables();
         if (!buildables.contains(buildable)) {
             throw new InvalidActionException(String.format("%s cannot be built", buildable));
+        } else if (buildable.equals("midnight_armour") && getMap().getEntities(ZombieToast.class).size() > 0) {
+            throw new InvalidActionException(String.format("zombies exist: %s cannot be built", buildable));
         }
         registerOnce(() -> player.build(buildable, entityFactory), PLAYER_MOVEMENT, "playerBuildsItem");
         tick();
@@ -101,6 +109,13 @@ public class Game {
             throw new IllegalArgumentException("Entity cannot be interacted");
         if (!((Interactable) e).isInteractable(player)) {
             throw new InvalidActionException("Entity cannot be interacted");
+        }
+        if (e instanceof Mercenary && (player.getInventory().getEntities(Sceptre.class).size() > 0)) {
+            int controlLength = player.getInventory().getEntities(Sceptre.class).get(0).getControlLength();
+            if (!((Mercenary) e).isAllied()) {
+                ((Mercenary) e).setControlLength(controlLength);
+                ((Mercenary) e).setUnderControl(true);
+            }
         }
         registerOnce(() -> ((Interactable) e).interact(player, this), PLAYER_MOVEMENT, "playerInteracts");
         tick();
@@ -202,5 +217,9 @@ public class Game {
 
     public BattleFacade getBattleFacade() {
         return battleFacade;
+    }
+
+    public int getNumEnemiesDestroyed() {
+        return numEnemiesDestroyed;
     }
 }

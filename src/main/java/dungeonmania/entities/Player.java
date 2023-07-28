@@ -49,10 +49,6 @@ public class Player extends Entity implements Battleable {
         return inventory.hasWeapon();
     }
 
-    public BattleItem getWeapon() {
-        return inventory.getWeapon();
-    }
-
     public List<String> getBuildables() {
         return inventory.getBuildables();
     }
