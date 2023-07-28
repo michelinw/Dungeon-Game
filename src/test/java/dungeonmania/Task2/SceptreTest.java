@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SceptreTest {
     @Test
-    @DisplayName("Test sceptre craft")
+    @DisplayName("Test sceptre craft two arrows and sunstone")
     public void craftSceptre() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("sceptre_buildables", "simple");
+        DungeonResponse res = dmc.newGame("d_sceptre_buildables", "c_simple");
 
         assertEquals(0, TestUtils.getInventory(res, "arrow").size());
         assertEquals(0, TestUtils.getInventory(res, "arrow").size());
@@ -27,31 +27,27 @@ public class SceptreTest {
         res = dmc.tick(Direction.RIGHT);
         assertEquals(2, TestUtils.getInventory(res, "arrow").size());
 
-        // Pick up key
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "key").size());
 
-        // Pick up sun stone
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
 
-        // Build sceptre
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
         res = assertDoesNotThrow(() -> dmc.build("sceptre"));
         assertEquals(1, TestUtils.getInventory(res, "sceptre").size());
 
-        // Materials used in construction disappear from inventory
         assertEquals(0, TestUtils.getInventory(res, "arrow").size());
         assertEquals(0, TestUtils.getInventory(res, "arrow").size());
         assertEquals(0, TestUtils.getInventory(res, "key").size());
     }
 
     @Test
-    @DisplayName("Test sceptre craft")
+    @DisplayName("Test sceptre craft wood, key and sunstone")
     public void craftSceptreTwo() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("sceptre_buildables2", "simple");
+        DungeonResponse res = dmc.newGame("d_sceptre_buildables2", "c_simple");
 
         assertEquals(0, TestUtils.getInventory(res, "wood").size());
         assertEquals(0, TestUtils.getInventory(res, "key").size());
@@ -63,30 +59,26 @@ public class SceptreTest {
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "key").size());
 
-        // Pick up key
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "key").size());
 
-        // Pick up sun stone
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
 
-        // Build sceptre
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
         res = assertDoesNotThrow(() -> dmc.build("sceptre"));
         assertEquals(1, TestUtils.getInventory(res, "sceptre").size());
 
-        // Materials used in construction disappear from inventory
         assertEquals(0, TestUtils.getInventory(res, "wood").size());
         assertEquals(0, TestUtils.getInventory(res, "key").size());
     }
 
     @Test
-    @DisplayName("Test sceptre craft")
+    @DisplayName("Test sceptre craft wood, treasure and sunstone")
     public void craftSceptreThree() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("sceptre_buildables3", "simple");
+        DungeonResponse res = dmc.newGame("d_sceptre_buildables3", "c_simple");
 
         assertEquals(0, TestUtils.getInventory(res, "wood").size());
         assertEquals(0, TestUtils.getInventory(res, "treasure").size());
@@ -98,25 +90,22 @@ public class SceptreTest {
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "treasure").size());
 
-        // Pick up sun stone
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
 
-        // Build sceptre
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
         res = assertDoesNotThrow(() -> dmc.build("sceptre"));
         assertEquals(1, TestUtils.getInventory(res, "sceptre").size());
 
-        // Materials used in construction disappear from inventory
         assertEquals(0, TestUtils.getInventory(res, "wood").size());
         assertEquals(0, TestUtils.getInventory(res, "treasure").size());
     }
 
     @Test
-    @DisplayName("Testing a sceptre can mind control a mercenary")
+    @DisplayName("Can a sceptre mind control an enemy (mercenary) test")
     public void sceptreControlMercenary() {
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("sceptre_buildables", "simple");
+        DungeonResponse res = dmc.newGame("d_sceptre_buildables", "c_simple");
 
         String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
 
@@ -126,20 +115,16 @@ public class SceptreTest {
         res = dmc.tick(Direction.RIGHT);
         assertEquals(2, TestUtils.getInventory(res, "arrow").size());
 
-        // Pick up key
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "key").size());
 
-        // Pick up sun stone
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "sun_stone").size());
 
-        // Build sceptre
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
         res = assertDoesNotThrow(() -> dmc.build("sceptre"));
         assertEquals(1, TestUtils.getInventory(res, "sceptre").size());
 
-        // mind control
         res = assertDoesNotThrow(() -> dmc.interact(mercId));
 
         res = dmc.tick(Direction.RIGHT);
