@@ -5,7 +5,6 @@ import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.UsableBattleItem;
 import dungeonmania.entities.inventory.InventoryItem;
-import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public class Sword extends Entity implements InventoryItem, UsableBattleItem {
@@ -22,11 +21,6 @@ public class Sword extends Entity implements InventoryItem, UsableBattleItem {
         super(position);
         this.attack = attack;
         this.durability = durability;
-    }
-
-    @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return true;
     }
 
     @Override

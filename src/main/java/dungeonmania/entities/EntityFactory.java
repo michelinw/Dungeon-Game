@@ -13,6 +13,7 @@ import dungeonmania.entities.logicalentities.SwitchDoor;
 import dungeonmania.map.GameMap;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
+import dungeonmania.entities.conductable.Switch;
 import dungeonmania.entities.conductable.Wire;
 import dungeonmania.util.Position;
 
@@ -204,6 +205,9 @@ public class EntityFactory {
         case "switch_door":
             String sdLogicalRule = jsonEntity.getString("logic");
             return new SwitchDoor(pos, sdLogicalRule);
+        case "swamp_tile":
+            int movement = jsonEntity.getInt("movement_factor");
+            return new SwampTile(pos, movement);
         default:
             return null;
         }

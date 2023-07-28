@@ -12,9 +12,9 @@ import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.Portal;
 import dungeonmania.entities.collectables.Bomb;
+import dungeonmania.entities.conductable.LogicBombActivator;
 import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.entities.enemies.ZombieToastSpawner;
-import dungeonmania.entities.logicalentities.LogicBombActivator;
 import dungeonmania.entities.logicalentities.LogicalEntity;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
@@ -116,7 +116,7 @@ public class GameMap {
             return;
         triggerMovingAwayEvent(entity);
         removeNode(entity);
-        entity.translate(direction);
+        entity.setPosition(Position.translateBy(entity.getPosition(), direction));
         addEntity(entity);
         triggerOverlapEvent(entity);
     }

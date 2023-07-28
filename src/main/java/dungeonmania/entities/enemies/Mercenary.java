@@ -8,12 +8,12 @@ import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.collectables.SunStone;
 import dungeonmania.entities.collectables.Treasure;
+import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrategy;
-import dungeonmania.entities.enemies.movementStrategy.InvisibilityMovementStrategy;
+import dungeonmania.entities.enemies.movementStrategy.PlayerInvincibilityEnemyMovement;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
-
 import dungeonmania.util.Position;
 
 public class Mercenary extends Enemy implements Interactable {
@@ -129,15 +129,18 @@ public class Mercenary extends Enemy implements Interactable {
                 setNextPositionStrategy(new DefaultRandomMovementStrategy());
                 nextPos = getNextPosition(game);
             }
-        } else {
-            if (player.getEffectivePotion() instanceof InvisibilityPotion) {
-                setNextPositionStrategy(new InvisibilityMovementStrategy());
+            map.moveTo(this, nextPos);
+        } else if (player.getEffectivePotion() instanceof InvincibilityPotion) {
+            if (!this.isStuck()) {
+                setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
                 nextPos = getNextPosition(game);
-            } else {
+            }
+        } else {
+            if (!this.isStuck()) {
                 nextPos = map.dijkstraPathFind(getPosition(), player.getPosition(), this);
+                map.moveTo(this, nextPos);
             }
         }
-        map.moveTo(this, nextPos);
         if (this.isUnderControl()) {
             int length = this.getControlLength() - 1;
             this.setControlLength(length);
@@ -161,4 +164,9 @@ public class Mercenary extends Enemy implements Interactable {
             return super.getBattleStatistics();
         return new BattleStatistics(0, allyAttack, allyDefence, 1, 1);
     }
+
+    public boolean isAdjacentToPlayer() {
+        return isAdjacentToPlayer;
+    }
+
 }
