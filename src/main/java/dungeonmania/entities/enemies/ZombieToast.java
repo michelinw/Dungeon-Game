@@ -1,9 +1,9 @@
 package dungeonmania.entities.enemies;
 
 import dungeonmania.Game;
-import dungeonmania.entities.collectables.potions.InvisibilityPotion;
+import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrategy;
-import dungeonmania.entities.enemies.movementStrategy.InvisibilityMovementStrategy;
+import dungeonmania.entities.enemies.movementStrategy.PlayerInvincibilityEnemyMovement;
 import dungeonmania.util.Position;
 
 public class ZombieToast extends Enemy {
@@ -17,8 +17,8 @@ public class ZombieToast extends Enemy {
     @Override
     public void move(Game game) {
         if (!this.isStuck()) {
-            if (game.getPlayer().getEffectivePotion() instanceof InvisibilityPotion) {
-                setNextPositionStrategy(new InvisibilityMovementStrategy());
+            if (game.getPlayer().getEffectivePotion() instanceof InvincibilityPotion) {
+                setNextPositionStrategy(new PlayerInvincibilityEnemyMovement());
             } else {
                 setNextPositionStrategy(new DefaultRandomMovementStrategy());
             }
@@ -26,5 +26,4 @@ public class ZombieToast extends Enemy {
             game.getMap().moveTo(this, nextPos);
         }
     }
-
 }
