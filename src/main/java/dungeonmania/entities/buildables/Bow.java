@@ -2,10 +2,9 @@ package dungeonmania.entities.buildables;
 
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
-import dungeonmania.entities.BattleItem;
 import dungeonmania.entities.UsableBattleItem;
 
-public class Bow extends Buildable implements UsableBattleItem, BattleItem {
+public class Bow extends Buildable implements UsableBattleItem {
     private int durability;
 
     public Bow(int durability) {
