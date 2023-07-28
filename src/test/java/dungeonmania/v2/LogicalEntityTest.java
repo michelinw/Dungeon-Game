@@ -146,7 +146,7 @@ public class LogicalEntityTest {
 
     @Test
     @Tag("18-4")
-    @DisplayName("Test ")
+    @DisplayName("Test complex")
     public void moreLightBulbAndSwitchDoorTests() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_4", "c_logicalEntitiesTest_1");
@@ -173,7 +173,7 @@ public class LogicalEntityTest {
 
     @Test
     @Tag("18-5")
-    @DisplayName("Test ")
+    @DisplayName("Test complex 2")
     public void evenMoreLightBulbAndSwitchDoors() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_logicalEntitiesTest_5", "c_logicalEntitiesTest_1");
