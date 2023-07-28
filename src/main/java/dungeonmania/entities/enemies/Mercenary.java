@@ -14,7 +14,6 @@ import dungeonmania.entities.enemies.movementStrategy.DefaultRandomMovementStrat
 import dungeonmania.entities.enemies.movementStrategy.PlayerInvincibilityEnemyMovement;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
-
 import dungeonmania.util.Position;
 
 public class Mercenary extends Enemy implements Interactable {
